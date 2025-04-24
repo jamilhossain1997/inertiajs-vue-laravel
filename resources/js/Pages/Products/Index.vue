@@ -3,6 +3,7 @@
         <h1 class="text-2xl font-bold mb-4">Products</h1>
         <Link href="/products/create" class="bg-green-600 text-white px-4 py-2 mb-4 inline-block rounded">+ New Product
         </Link>
+        <button @click="logout">Logout</button>
 
         <table class="table-auto w-full border-collapse">
             <thead>
@@ -33,12 +34,18 @@
 
 <script setup>
 import { router, Link } from '@inertiajs/vue3'
+import { Inertia } from '@inertiajs/inertia'
+
 defineProps(['products'])
 
 function deleteProduct(id) {
     if (confirm('Are you sure?')) {
         router.delete(`/products/${id}`)
     }
+}
+
+const logout = () => {
+  Inertia.post('/logout')
 }
 </script>
 
