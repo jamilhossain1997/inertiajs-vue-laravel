@@ -16,4 +16,24 @@ class ProductController extends Controller
             'products' => Product::all()
         ]);
     }
+
+
+    public function create()
+    {
+        return Inertia::render('Products/Create');
+    }
+
+    public function store(Request $request)
+    {
+      $_product=  $request->validate([
+            'name' => 'required',
+            'sku' => 'required|unique:products',
+            'price' => 'required|numeric',
+            'stock' => 'required|integer',
+        ]);
+
+        Product::create($_product);
+
+        return redirect()->route('products.index')->with('message', 'Product created');
+    }
 }
