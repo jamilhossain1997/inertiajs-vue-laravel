@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
+
+    public function create()
+    {
+        return Inertia::render('Auth/Login');
+    }
+
+
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -18,17 +25,28 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
-        $User = User::where('email', $credentials['email'])->first();
-        if ($User && Hash::check($credentials['password'], $User->password)) {
-            Auth::login($User);
+        $user = User::where('email', $credentials['email'])->first();
+
+        if ($user && Hash::check($credentials['password'], $user->password)) {
+            Auth::login($user);
             $request->session()->regenerate();
+
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'Login successful'
+                ]);
+            }
+
             return redirect()->route('products.index');
-        } else {
-            return response()->json([
-                'message' => 'Invalid credentials'
-            ], 422);
         }
-        
+
+        if ($request->expectsJson()) {
+            return response()->json(['message' => 'Invalid credentials'], 422);
+        }
+
+        return back()->withErrors([
+            'email' => 'Invalid credentials',
+        ]);
     }
 
     public function logout(Request $request)

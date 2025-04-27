@@ -14,16 +14,17 @@ use Inertia\Inertia;
 //     return view('welcome');
 // });
 
-Route::get('/login', function () {
-    return Inertia::render('Auth/Login');
-})->middleware('guest')->name('login');
+// Route::get('/login', function () {
+//     return Inertia::render('Auth/Login');
+// })->middleware('guest')->name('login');
 
 Route::get('/register', function () {
     return Inertia::render('Auth/Register');
 })->middleware('guest')->name('register');
 
 
-Route::post('/login', [LoginController::class, 'login']);
+Route::post('/login', [LoginController::class, 'login'])->middleware('guest');
+Route::get('/login', [LoginController::class, 'create'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'register'])->middleware('guest');
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
 

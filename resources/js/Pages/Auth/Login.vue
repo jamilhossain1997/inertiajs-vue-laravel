@@ -38,6 +38,8 @@ const submit = () => {
   form.post('/login', {
     onFinish: () => {
       loading.value = false
+      this.$router.push('/products');
+
     }
   })
 }
