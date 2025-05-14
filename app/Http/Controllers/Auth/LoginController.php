@@ -17,7 +17,6 @@ class LoginController extends Controller
         return Inertia::render('Auth/Login');
     }
 
-
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -31,22 +30,15 @@ class LoginController extends Controller
             Auth::login($user);
             $request->session()->regenerate();
 
-            if ($request->expectsJson()) {
-                return response()->json([
-                    'message' => 'Login successful'
-                ]);
-            }
-
-            return redirect()->route('products.index');
+            return response()->json([
+                'message' => 'Login successful',
+                'redirect' => route('products.index')
+            ]);
         }
 
-        if ($request->expectsJson()) {
-            return response()->json(['message' => 'Invalid credentials'], 422);
-        }
-
-        return back()->withErrors([
-            'email' => 'Invalid credentials',
-        ]);
+        return response()->json([
+            'message' => 'Invalid credentials'
+        ], 422);
     }
 
     public function logout(Request $request)

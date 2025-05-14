@@ -38,7 +38,9 @@ const submit = () => {
   form.post('/login', {
     onFinish: () => {
       loading.value = false
-      this.$router.push('/products');
+      if (response.data.redirect) {
+        this.$inertia.visit(response.data.redirect); 
+      }
 
     }
   })
