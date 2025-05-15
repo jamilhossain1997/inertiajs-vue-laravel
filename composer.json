@@ -9,11 +9,14 @@
         "php": "^8.2",
         "darkaonline/l5-swagger": "^9.0",
         "inertiajs/inertia-laravel": "^2.0",
+        "infobip/infobip-api-php-client": "^4.0",
         "laravel/framework": "^11.31",
         "laravel/passport": "^12.4",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "laravel/ui": "^4.6",
+        "twilio/sdk": "^8.6",
+        "vonage/client": "^4.1",
         "zircote/swagger-php": "^5.0"
     },
     "require-dev": {

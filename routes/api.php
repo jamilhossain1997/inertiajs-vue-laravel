@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\AuthController;
 
+use App\Http\Controllers\SmsController;
 
 
 /**
@@ -39,3 +40,6 @@ Route::post('/upload', [AuthController::class, 'upload']);
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
+
+
+Route::post('/send-sms', [SmsController::class, 'send']);

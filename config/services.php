@@ -35,4 +35,30 @@ return [
         ],
     ],
 
+    'sms_settings' => [
+        'infobip' => [
+            'BD' => [
+                'base_url' => env('INFOBIP_BD_BASE_URL'),
+                'api_key' => env('INFOBIP_BD_API_KEY'),
+                'from' => env('INFOBIP_BD_FROM'),
+            ],
+        ],
+        'twilio' => [
+            'US' => [
+                'sid' => env('TWILIO_SID'),
+                'token' => env('TWILIO_TOKEN'),
+                'from' => env('TWILIO_FROM'),
+            ],
+        ],
+        'nexmo' => [
+            'BD' => [
+                'key' => env('NEXMO_KEY'),
+                'secret' => env('NEXMO_SECRET'),
+                'from' => env('NEXMO_FROM'),
+            ],
+        ],
+    ],
+
+
+
 ];
